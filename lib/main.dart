@@ -14,6 +14,7 @@ import 'EntryPage.dart';
 import 'rk_city_campus.dart';
 import 'loginpage.dart';
 import 'adminpage.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -29,7 +30,7 @@ void main() async {
   routes: {
   '/': (context) => SplashScreen(),
   '/home': (context) => LoginPage(),
-        
+ 
    // Ensure HomePage is correctly imported and routed
 },
   ));
