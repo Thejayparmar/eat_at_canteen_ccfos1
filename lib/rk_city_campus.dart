@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'orderstatepage.dart';
 
-
+// Main class representing the RK City Campus with a list of canteens
 class RKCityCampus extends StatelessWidget {
+  // List of canteens with their names and images
   final List<Map<String, dynamic>> canteens = [
     {'name': 'Main Canteen', 'image': 'assets/images/main_canteen.png'},
     {'name': 'South-Ind Canteen', 'image': 'assets/images/south_ind_canteen.png'},
@@ -16,19 +17,21 @@ class RKCityCampus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('RKU Main Campus Canteens'),
+        title: Text('RKU Main Campus Canteens'), // App bar title
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.purple, // Background color of the app bar
       ),
       body: ListView.builder(
-        itemCount: canteens.length,
+        itemCount: canteens.length, // Number of canteens to display
         itemBuilder: (context, index) {
+          // Building each item in the list
           return Card(
-            margin: EdgeInsets.all(8),
+            margin: EdgeInsets.all(8), // Margin around each card
             child: ListTile(
-              title: Text(canteens[index]['name']),
-              leading: _buildCanteenImage(canteens[index]['image']),
+              title: Text(canteens[index]['name']), // Canteen name
+              leading: _buildCanteenImage(canteens[index]['image']), // Canteen image
               onTap: () {
+                // On tapping a canteen, navigate to DetailPage1
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -43,78 +46,82 @@ class RKCityCampus extends StatelessWidget {
     );
   }
 
+  // Method to display canteen image or a placeholder if the image is not found
   Widget _buildCanteenImage(String imagePath) {
     return Image.asset(
       imagePath,
       width: 50,
       height: 50,
       errorBuilder: (context, error, stackTrace) {
-        return Center(child: Text('Image not found!'));
+        return Center(child: Text('Image not found!')); // Placeholder text
       },
     );
   }
 }
 
+// Detail page class for displaying specific canteen details
 class DetailPage1 extends StatelessWidget {
-  final Map<String, dynamic> canteen;
+  final Map<String, dynamic> canteen; // Data for the selected canteen
 
-  DetailPage1({required this.canteen});
+  DetailPage1({required this.canteen}); // Constructor with required canteen parameter
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(canteen['name']),
+        title: Text(canteen['name']), // Title of the app bar with canteen name
         backgroundColor: Colors.purple,
       ),
       body: Column(
         children: [
-          _buildCanteenImage(canteen['image']),
+          _buildCanteenImage(canteen['image']), // Display canteen image
           _buildProductCard(
             context,
-            'Burger',
-            'Fast Food',
-            '100',
+            'Burger', // Product title
+            'Fast Food', // Product type
+            '100', // Product price
           ),
           _buildProductCard(
             context,
-            'Pizza',
-            'Italian',
-            '200',
+            'Pizza', // Product title
+            'Italian', // Product type
+            '200', // Product price
           ),
         ],
       ),
     );
   }
 
+  // Method to display canteen image with a placeholder if the image is not found
   Widget _buildCanteenImage(String imagePath) {
     return Image.asset(
       imagePath,
       width: 200,
       height: 200,
       errorBuilder: (context, error, stackTrace) {
-        return Center(child: Text('Image not found!'));
+        return Center(child: Text('Image not found!')); // Placeholder text
       },
     );
   }
 
+  // Method to build a card for each product with buy functionality
   Widget _buildProductCard(BuildContext context, String title, String type, String price) {
     return Card(
       color: Colors.purple,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.0), // Rounded corners for the card
       ),
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: EdgeInsets.symmetric(vertical: 8.0), // Vertical margin
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            SizedBox(width: 16.0),
+            SizedBox(width: 16.0), // Spacing on the left side
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  title, // Product title
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
@@ -122,14 +129,14 @@ class DetailPage1 extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'TYPE: $type',
+                  'TYPE: $type', // Product type
                   style: TextStyle(
                     fontSize: 14.0,
                     color: Colors.black,
                   ),
                 ),
                 Text(
-                  'PRICE: $price',
+                  'PRICE: $price', // Product price
                   style: TextStyle(
                     fontSize: 14.0,
                     color: Colors.black,
@@ -137,14 +144,14 @@ class DetailPage1 extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(),
+            Spacer(), // Spacer to push the button to the right
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.black,
+                primary: Colors.black, // Button color
               ),
               onPressed: () async {
                 try {
-                  // Add the product to Firestore
+                  // Add the product order to Firestore database
                   await FirebaseFirestore.instance.collection('orders').add({
                     'title': title,
                     'type': type,
@@ -153,7 +160,7 @@ class DetailPage1 extends StatelessWidget {
                     'timestamp': FieldValue.serverTimestamp(),
                   });
 
-                  // Show confirmation message
+                  // Show confirmation message on successful order placement
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
                       'Order of $title is placed Successfully',
@@ -162,26 +169,26 @@ class DetailPage1 extends StatelessWidget {
                     backgroundColor: Colors.green, // Set background color to green
                   ));
 
-                  // Wait for a few seconds to allow the SnackBar to show
+                  // Wait for a few seconds to display the SnackBar
                   await Future.delayed(Duration(seconds: 2));
 
-                  // Navigate to OrderStatePage
+                  // Navigate to OrderStatusPage after delay
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OrderStatusPage(), // Replace with your actual OrderStatePage widget
+                      builder: (context) => OrderStatusPage(), // Navigate to order status page
                     ),
                   );
 
                 } catch (e) {
-                  // Show error message
+                  // Show error message on failure to add product
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text('Failed to add product: $e'),
                   ));
-                  print('Error adding product to Firestore: $e');
+                  print('Error adding product to Firestore: $e'); // Log error
                 }
               },
-              child: Text('BUY'),
+              child: Text('BUY'), // Button text
             ),
           ],
         ),
@@ -189,4 +196,3 @@ class DetailPage1 extends StatelessWidget {
     );
   }
 }
-
