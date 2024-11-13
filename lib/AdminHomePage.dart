@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 /// to enter details of a food item (name, type, and price) and submit them. 
 /// The details are then passed to another screen via navigation.
 
+
 class AdminHomePage extends StatefulWidget {
   @override
   _AdminHomePageState createState() => _AdminHomePageState();
