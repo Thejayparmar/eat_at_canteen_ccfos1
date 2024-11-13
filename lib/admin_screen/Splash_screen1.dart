@@ -13,6 +13,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   void initState() {
+
+
+
+    
     super.initState();
     _controller = AnimationController(
       duration: const Duration(seconds: 2), // Total animation time
