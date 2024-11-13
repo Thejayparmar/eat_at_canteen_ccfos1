@@ -15,9 +15,12 @@ import 'package:flutter/foundation.dart'
 /// );
 /// ```
 class DefaultFirebaseOptions {
+  // This method returns the Firebase configuration for the current platform.
+  // It checks if the app is running on the web or a specific mobile platform
+  // and provides the corresponding Firebase options.
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      return web; // Returns the Firebase configuration for web platforms.
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -26,11 +29,11 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.iOS:
-        return ios;
+        return ios; // Returns the Firebase configuration for iOS.
       case TargetPlatform.macOS:
-        return macos;
+        return macos; // Returns the Firebase configuration for macOS.
       case TargetPlatform.windows:
-        return windows;
+        return windows; // Returns the Firebase configuration for Windows.
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -43,41 +46,45 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // Firebase configuration for the web platform.
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBGj04f5A6YgKtPB8NW-2ai11q-88RuMBM',
-    appId: '1:341995618858:web:fd3fa252033443e7e1f953',
-    messagingSenderId: '341995618858',
-    projectId: 'eatatcanteenccfos-1',
-    authDomain: 'eatatcanteenccfos-1.firebaseapp.com',
-    storageBucket: 'eatatcanteenccfos-1.appspot.com',
-    measurementId: 'G-R5BLRZJEL3',
+    apiKey: 'AIzaSyBGj04f5A6YgKtPB8NW-2ai11q-88RuMBM', // Your Firebase API key.
+    appId: '1:341995618858:web:fd3fa252033443e7e1f953', // Your Firebase App ID.
+    messagingSenderId: '341995618858', // Sender ID for Firebase Cloud Messaging.
+    projectId: 'eatatcanteenccfos-1', // Firebase Project ID.
+    authDomain: 'eatatcanteenccfos-1.firebaseapp.com', // Firebase Authentication domain.
+    storageBucket: 'eatatcanteenccfos-1.appspot.com', // Firebase Storage bucket.
+    measurementId: 'G-R5BLRZJEL3', // Google Analytics measurement ID.
   );
 
+  // Firebase configuration for the iOS platform.
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCJ4N2HRetpi3M_ugLMEhDuZYFM4UkkyMw',
-    appId: '1:341995618858:ios:8e2b84ad5d3dae13e1f953',
-    messagingSenderId: '341995618858',
-    projectId: 'eatatcanteenccfos-1',
-    storageBucket: 'eatatcanteenccfos-1.appspot.com',
-    iosBundleId: 'com.example.eatAtCanteenCcfos',
+    apiKey: 'AIzaSyCJ4N2HRetpi3M_ugLMEhDuZYFM4UkkyMw', // Your Firebase API key.
+    appId: '1:341995618858:ios:8e2b84ad5d3dae13e1f953', // Your Firebase App ID for iOS.
+    messagingSenderId: '341995618858', // Sender ID for Firebase Cloud Messaging.
+    projectId: 'eatatcanteenccfos-1', // Firebase Project ID.
+    storageBucket: 'eatatcanteenccfos-1.appspot.com', // Firebase Storage bucket.
+    iosBundleId: 'com.example.eatAtCanteenCcfos', // Your iOS app bundle ID.
   );
 
+  // Firebase configuration for the macOS platform.
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCJ4N2HRetpi3M_ugLMEhDuZYFM4UkkyMw',
-    appId: '1:341995618858:ios:8e2b84ad5d3dae13e1f953',
-    messagingSenderId: '341995618858',
-    projectId: 'eatatcanteenccfos-1',
-    storageBucket: 'eatatcanteenccfos-1.appspot.com',
-    iosBundleId: 'com.example.eatAtCanteenCcfos',
+    apiKey: 'AIzaSyCJ4N2HRetpi3M_ugLMEhDuZYFM4UkkyMw', // Your Firebase API key.
+    appId: '1:341995618858:ios:8e2b84ad5d3dae13e1f953', // Firebase App ID for macOS (same as iOS).
+    messagingSenderId: '341995618858', // Sender ID for Firebase Cloud Messaging.
+    projectId: 'eatatcanteenccfos-1', // Firebase Project ID.
+    storageBucket: 'eatatcanteenccfos-1.appspot.com', // Firebase Storage bucket.
+    iosBundleId: 'com.example.eatAtCanteenCcfos', // Your macOS app bundle ID.
   );
 
+  // Firebase configuration for the Windows platform.
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBGj04f5A6YgKtPB8NW-2ai11q-88RuMBM',
-    appId: '1:341995618858:web:59b5f696c56964dee1f953',
-    messagingSenderId: '341995618858',
-    projectId: 'eatatcanteenccfos-1',
-    authDomain: 'eatatcanteenccfos-1.firebaseapp.com',
-    storageBucket: 'eatatcanteenccfos-1.appspot.com',
-    measurementId: 'G-CWHZ38ZXTP',
+    apiKey: 'AIzaSyBGj04f5A6YgKtPB8NW-2ai11q-88RuMBM', // Your Firebase API key.
+    appId: '1:341995618858:web:59b5f696c56964dee1f953', // Your Firebase App ID for Windows.
+    messagingSenderId: '341995618858', // Sender ID for Firebase Cloud Messaging.
+    projectId: 'eatatcanteenccfos-1', // Firebase Project ID.
+    authDomain: 'eatatcanteenccfos-1.firebaseapp.com', // Firebase Authentication domain.
+    storageBucket: 'eatatcanteenccfos-1.appspot.com', // Firebase Storage bucket.
+    measurementId: 'G-CWHZ38ZXTP', // Google Analytics measurement ID for Windows.
   );
 }
