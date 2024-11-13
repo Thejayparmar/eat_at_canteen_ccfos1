@@ -23,14 +23,14 @@ class _OtpPageState extends State<OtpPage> {
     });
   }
 
-  // Function to create the numeric keypad
+  // Function to create the numeric keypad (3x4 grid)
   Widget _numericPad() {
     return GridView.count(
-      crossAxisCount: 3,  // Number of columns in the keypad grid
-      padding: EdgeInsets.all(20),
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      shrinkWrap: true,  // Allow keypad to take up only the required space
+      crossAxisCount: 3,  // Number of columns in the keypad grid (3 columns)
+      padding: EdgeInsets.all(20),  // Padding around the grid
+      mainAxisSpacing: 10,  // Vertical spacing between buttons
+      crossAxisSpacing: 10,  // Horizontal spacing between buttons
+      shrinkWrap: true,  // Allow keypad to take up only the required space (no extra scrolling)
       children: <String>[
         '1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '⌫'
       ].map((key) {
@@ -40,7 +40,7 @@ class _OtpPageState extends State<OtpPage> {
             style: ElevatedButton.styleFrom(
               primary: Colors.grey[200],  // Background color of the button
               shape: CircleBorder(),  // Circular button shape
-              padding: EdgeInsets.all(20)  // Button padding
+              padding: EdgeInsets.all(20),  // Button padding
             ),
             child: Text(key, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
           ),
@@ -56,25 +56,25 @@ class _OtpPageState extends State<OtpPage> {
         title: Text("Verify your phone number"),  // Title of the app bar
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,  // Center the children vertically
         children: <Widget>[
           // Instruction text for the user
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Text(
               "We've sent an SMS with an activation code to your phone +91 8511496033",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,  // Center the instruction text
+              style: TextStyle(fontSize: 16),  // Set the text size
             ),
           ),
           SizedBox(height: 30),  // Space between text and OTP display
 
-          // Display entered OTP digits
+          // Display entered OTP digits as individual characters
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,  // Center the OTP display
             children: otp.split('').map((e) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(e, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              padding: const EdgeInsets.all(8.0),  // Space between OTP digits
+              child: Text(e, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),  // Style for each OTP digit
             )).toList(),
           ),
           
@@ -94,8 +94,8 @@ class _OtpPageState extends State<OtpPage> {
               } : null,  // Disable button if OTP is not complete or incorrect
               child: Text('Verify'),  // Button text
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue,  // Button color
-                onPrimary: Colors.white,  // Text color
+                primary: Colors.blue,  // Button background color
+                onPrimary: Colors.white,  // Button text color
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),  // Button padding
               ),
             ),
